@@ -1,21 +1,29 @@
 #!/usr/bin/python3
-"""the text_indentation module"""
+"""This module defines the text_indentation function
+"""
 
 
 def text_indentation(text):
-    """puts two new lines after these characters in a string: ., :, and ?
+    """ Function that prints indented text.
     Args:
-        text: the string to print
-    Raises:
-        TypeError: if text is not a string
+        text (str): text to print
     """
-    if not isinstance(text, str):
-        raise TypeError('text must be a string')
-    for char in ".?:":
-        text = (char + "\n\n").join(
-            [sen.strip(" ") for sen in text.split(char)])
-    print(text, end="")
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testfile("tests/5-text_indentation.txt")
+    if type(text) != str:
+        raise TypeError("text must be a string")
+    flag = 0
+    newstring = ""
+    for i in text:
+        if flag == 1:
+            newstring = ""
+            flag = 0
+        if i not in "?:.":
+            newstring += i
+        else:
+            newstring += i
+            print(newstring.strip())
+            print()
+            flag = 1
+    if flag == 0 and '\n' not in newstring:
+        print(newstring.strip(), end="")
+    elif flag == 0:
+        print(newstring.strip())

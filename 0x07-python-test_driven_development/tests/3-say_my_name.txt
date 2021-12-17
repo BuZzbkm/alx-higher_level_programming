@@ -1,57 +1,63 @@
-the ``say_my_name`` module
-==========================
+This doctest checks a function that prints My name is <first name> <last name>
+Import module
+>>> say_my_name = __import__('3-say_my_name').say_my_name
 
-using ``say_my_name``
----------------------
+First and Last Name
+>>> say_my_name("John", "Smith")
+My name is John Smith
 
-First import ``say_my_name``:
+>>> say_my_name("Walter", "White")
+My name is Walter White
 
-	>>> say_my_name = __import__('3-say_my_name').say_my_name
 
-Test: normal mode:
+Only First Name:
+>>> say_my_name("Bob")
+My name is Bob 
 
-	>>> say_my_name("tabitha", "katz")
-	My name is tabitha katz
+Raise exception if first name is not string
+>>> say_my_name(7, "Smith")
+Traceback (most recent call last):
+TypeError: first_name must be a string
 
-Test: just a first_name:
 
-	>>> say_my_name("tabitha")
-	My name is tabitha 
 
-Test: bad first name:
+Raise exception if missing two arguments
+>>> say_my_name()
+Traceback (most recent call last):
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
 
-	>>> say_my_name(42, "katz")
-	Traceback (most recent call last):
-	...
-	TypeError: first_name must be a string
 
-Test: no names:
 
-	>>> say_my_name("", "")
-	My name is  
+Raise exception if second name is not string
+>>> say_my_name("John", 7)
+Traceback (most recent call last):
+TypeError: last_name must be a string
 
-Test: spaces for names:
 
-	>>> say_my_name("  ", "  ")
-	My name is      
+Raise exception if first name and second name are not strings
+>>> say_my_name(7, 7)
+Traceback (most recent call last):
+TypeError: first_name must be a string
 
-Test: bad last_name:
 
-	>>> say_my_name("tabitha", 42)
-	Traceback (most recent call last):
-	...
-	TypeError: last_name must be a string
+Empty first string
+>>> say_my_name("", "Smith")
+My name is  Smith
 
-Test: both names are ints:
 
-	>>> say_my_name(42, 42)
-	Traceback (most recent call last):
-	...
-	TypeError: first_name must be a string
+Empty second string
+>>> say_my_name("John", "")
+My name is John 
 
-Test: no args:
 
-	>>> say_my_name()
-	Traceback (most recent call last):
-	...
-	TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+Empty first and second string
+>>> say_my_name("", "")
+My name is  
+
+Empty first and second string
+>>> say_my_name("")
+My name is  
+
+Multiple leading and trailing spaces
+>>> say_my_name(" ? ",)
+My name is  ?  
