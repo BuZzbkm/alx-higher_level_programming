@@ -1,17 +1,17 @@
 #!/usr/bin/node
-let value = {
+let myObject = {
   type: 'object',
   value: 12
 };
-console.log(value);
+console.log(myObject);
 
-value.incr = function () {
+myObject.incr = function () {
   this.value++;
 };
 
-value.incr();
-console.log(value);
-value.incr();
-console.log(value);
-value.incr();
-console.log(value);
+myObject.incr();
+console.log(myObject);
+myObject.incr();
+console.log(myObject);
+myObject.incr();
+console.log(myObject);
