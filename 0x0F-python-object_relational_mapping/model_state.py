@@ -1,14 +1,18 @@
 #!/usr/bin/python3
-"""This file will create a class called State"""
-
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+"""Module model_state
+Defines a State class that will be written to a database"""
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
-class State(Base):
-    """This is the class State with class attribute id and name"""
-    __tablename__ = 'states'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(128))
+class State(Base):
+    """Class State
+    Inherits from class Base to define what the table State
+    looks like in a database.
+    """
+    __tablename__ = "states"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(128), nullable=False)

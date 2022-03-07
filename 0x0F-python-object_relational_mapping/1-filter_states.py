@@ -1,22 +1,25 @@
 #!/usr/bin/python3
-"""This file prints all state from database that begin with letter 'N'"""
+"""
+Module 1-filter_states
+Takes 3 arguments: username, password and database name to connect to the mysql
+serve running on localhost port 3306.
+"""
 
+from sys import argv
 import MySQLdb
-import sys
+
+
+def main():
+    """
+    Program starts here. Lists all states with a name starting with
+    N (upper N) from the database hbtn_0e_0_usa"""
+    db = MySQLdb.connect(host="localhost", port=3306,
+                         user=argv[1], passwd=argv[2], db=argv[3])
+    c = db.cursor()
+    c.execute("SELECT * FROM states WHERE name REGEXP '^N' ORDER BY id")
+    for i in c.fetchall():
+        print(i)
+
 
 if __name__ == "__main__":
-    try:
-        db = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
-                             passwd=sys.argv[2], db=sys.argv[3])
-        cur = db.cursor()
-        cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY \
-                     states.id ASC")
-        rows = cur.fetchall()
-        for r in rows:
-            print(r)
-        cur.close()
-    except MySQLdb.Error as error:
-        print("Failed to read data", error)
-    finally:
-        if db:
-            db.close()
+    main()
